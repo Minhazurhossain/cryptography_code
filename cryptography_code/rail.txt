@@ -1,0 +1,102 @@
+ // cretaing new matrix
+char railmat[key][message.length()];
+for (int i =0;i<key;i++){
+ for(int j=0;j<message.length();j++){
+           railmat[i][j]='*';
+}
+}
+
+//testing
+for (int i =0;i<key;i++){
+ for(int j=0;j<message.length();j++){
+           cout<<railmat[i][j];
+}
+cout<<endl;
+}
+
+//input letter one by one
+int row=0;
+int check=0;
+for(int i=0;i<message.length();i++){
+ if(check==0)
+{
+   railmat[row][i]=message[i];
+   row++;
+if(row==key){
+check=1;
+row--;
+}
+}
+else if(check==1){
+row--;
+railmat[row][i]=message[i];
+if(row==0){
+check=0;
+row=1;
+}
+}
+}
+}
+
+//encrypted text
+string encrptext="";
+//testing
+for (int i =0;i<key;i++){
+ for(int j=0;j<message.length();j++){
+          encrptext+=railmat[i][j];
+}
+
+}
+//removing * from text
+encrptext=regex_replace(encrptext,regex("\\*"),"");
+cout<<encrptext;
+
+
+
+decrypt(){
+int order=0;
+for(int  i=0;i<key;i++){
+for(int j=0;j<message.length();j++){
+string temp="";
+temp+=railmat[i][j];
+if(regex_match(temp,regex("\\*"))){
+continue;
+}
+else{
+railmat[i][j]=message[order];
+order++;
+}
+}
+}
+for (int i =0;i<key;i++){
+ for(int j=0;j<message.length();j++){
+           cout<<railmat[i][j];
+}
+cout<<endl;
+}
+
+string decryptext="";
+check=0;
+row=0;
+for(int i=0;i<message.length();i++){
+ if(check==0)
+{
+   decryptext+=railmat[row][i];
+   row++;
+if(row==key){
+check=1;
+row--;
+}
+}
+else if(check==1){
+row--;
+decryptext+=railmat[row][i];
+if(row==0){
+check=0;
+row=1;
+}
+}
+}
+}
+decryptext=regex_replace(encrptext,regex("\\*"),"");
+cout<<decryptext;
